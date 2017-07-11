@@ -19,20 +19,16 @@ const list = [
     }
 ];
 
-class Button extends Component {
-    render() {
-        const {onClick, className='', children} = this.props;
+function Button( {onClick, className='', children}) {
         return (
             <button onClick={onClick} className={className} type="button">
                 {children}
             </button>
         );
     }
-}
 
-class Search extends Component {
-    render() {
-        const {value, onChange, children} = this.props;
+
+  function Search({value, onChange, children}) {
         return (
             <form>
                 {children}
@@ -40,12 +36,9 @@ class Search extends Component {
             </form>
         );
     }
-}
 
-class Table extends Component {
-    render() {
-        const {list, pattern, onDismiss} = this.props;
-        return (
+
+const Table = ({list, pattern, onDismiss} ) =>
             <div>
 
                 {list.filter(isSearched(pattern)).map(item => <div key={item.objectID}>
@@ -66,11 +59,10 @@ class Table extends Component {
                     <span>
                         <Button onClick={() => onDismiss(item.objectID)}>Dismiss</Button>
                     </span>
-                </div>)}
+                </div>
+            )}
             </div>
-        );
-    }
-}
+    
 
 const isSearched = (searchTerm) => (item) => !searchTerm || item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
